@@ -34,7 +34,7 @@ namespace FestivalSales.Models
 
         public string AccountId { get; set; }
 
-        public UserRole userRole { get; set; }
+        public virtual UserRole userRole { get; set; }
 
         public string name { get; set; }
 

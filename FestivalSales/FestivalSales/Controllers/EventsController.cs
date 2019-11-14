@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FestivalSales.Models;
-
 using Microsoft.AspNet.Identity;
 namespace FestivalSales.Controllers
 {

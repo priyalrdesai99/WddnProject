@@ -4,20 +4,29 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using FestivalSales.Models;
 namespace FestivalSales.Controllers
 {
     public class AdminController : Controller
     {
         // GET: Admin
+        string tid;
+        [Authorize]
         public ActionResult Index()
         {
+            
             DataModel db = new DataModel();
+            string idd = User.Identity.GetUserId();
+            UserInfo info = db.UserInfos.FirstOrDefault(x => x.AccountId == idd);
+            System.Diagnostics.Debug.WriteLine(info.name);
+            System.Diagnostics.Debug.WriteLine(info.userRole.Id);
             ViewBag.Events = db.Events.Where(x => x.is_approved == false).ToList();
             ViewBag.Offers = db.Offers.Where(x => x.is_approved == false).ToList();
             ViewBag.Services = db.Services.Where(x => x.is_approved == false).ToList();
             return View();
         }
+        [Authorize]
         [HttpGet]
         public ActionResult ApproveEv(int? id)
         {
@@ -35,6 +44,7 @@ namespace FestivalSales.Controllers
 
         
         [HttpGet]
+        [Authorize]
         public ActionResult ApproveSe(int? id)
         {
             if (id == null)
